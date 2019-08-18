@@ -733,6 +733,20 @@ public class VirtualStickView extends RelativeLayout
                                             throttle-=0.1;
                                         }
                                         break;
+                                    case "Stop":
+                                        roll=0;
+                                        pitch=0;
+                                        yaw=0;
+                                        break;
+
+                                    case "Take off":
+                                        //起飞函数
+                                        break;
+                                    case "Landing":
+                                        //降落函数
+                                        break;
+                                        
+
 
 
 
