@@ -719,8 +719,8 @@ public class VirtualStickView extends RelativeLayout
 
                                 switch (jsonObject.getString("DataType")){
                                     case "DroneVector":
-                                        Double x = jsonObject.getDouble("x");
-                                        Double y = jsonObject.getDouble("y");
+                                        float x = Float.valueOf(jsonObject.getJSONObject("position").getString("x"));
+                                        float y = Float.valueOf(jsonObject.getJSONObject("position").getString("y"));
                                         if(x>0.3 ){
                                             roll = MaxRollSpeed;
 
