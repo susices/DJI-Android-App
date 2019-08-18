@@ -324,6 +324,12 @@ public class VirtualStickView extends RelativeLayout
                     }
                 });
 
+                if (null == sendVirtualStickDataTimer) {
+                    sendVirtualStickDataTask = new SendVirtualStickDataTask();
+                    sendVirtualStickDataTimer = new Timer();
+                    sendVirtualStickDataTimer.schedule(sendVirtualStickDataTask, 100, 200);
+                }
+
 
                 break;
 
@@ -710,6 +716,27 @@ public class VirtualStickView extends RelativeLayout
                             try{
                                 JSONObject jsonObject = new JSONObject(line);
                                 DataOutputStream out = new DataOutputStream(hostThreadSocket.getOutputStream());
+
+                                switch (jsonObject.getString("DataType")){
+                                    case "DroneVector":
+                                        Double x = jsonObject.getDouble("x");
+                                        Double y = jsonObject.getDouble("y");
+                                        if(x>0.3 ){
+                                            roll = MaxRollSpeed;
+
+                                        }else if(x<-0.3){
+                                            roll = - MaxRollSpeed;
+
+                                        }else if( y>0.3){
+                                            throttle+=0.1;
+                                        }else if (y<-0.3 && throttle>0){
+                                            throttle-=0.1;
+                                        }
+                                        break;
+
+
+
+                                }
 
 
 
